@@ -62,7 +62,7 @@ class PostfixCalculator {
                             interAns = number1 - number2;
                         else if (currentElement.equals("×"))
                             interAns = number1 * number2;
-                        else if (currentElement.equals("/"))
+                        else if (currentElement.equals("÷"))
                             interAns = number1 / number2;
                         else interAns = 0;
 
