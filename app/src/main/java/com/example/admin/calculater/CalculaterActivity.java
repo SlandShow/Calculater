@@ -171,7 +171,7 @@ public class CalculaterActivity extends AppCompatActivity {
         tmpNumber = "";
 
         String tmp = "";
-        for (String element: list) {
+        for (String element : list) {
             Toast.makeText(getApplicationContext(), element, Toast.LENGTH_SHORT).show();
             tmp += element + " ";
         }

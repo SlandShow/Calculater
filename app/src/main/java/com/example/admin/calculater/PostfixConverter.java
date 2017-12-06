@@ -1,5 +1,7 @@
 package com.example.admin.calculater;
 
+import android.widget.Toast;
+
 import java.util.Stack;
 
 /**
@@ -18,7 +20,7 @@ class PostfixConverter {
         output = "";
 
         // Convert infix notation to postfix
-        convert();
+        //convert();
     }
 
     public PostfixConverter() {
@@ -28,7 +30,7 @@ class PostfixConverter {
 
     public void startConvert(String output) {
         this.output = output;
-        convert();
+        convert(output);
     }
 
     private void gotOperator(String element, int priority) {
@@ -49,19 +51,20 @@ class PostfixConverter {
     }
 
     // From infix to postfix notation
-    private void convert() {
-        String[] elements = input.split(" ");
+    private void convert(String s) {
+        String[] elements = s.split(" ");
 
         for (String element : elements) {
             if (element.equals("+") || element.equals("-"))
                 gotOperator(element, 1);
             else if (element.equals("×") || element.equals("/"))
                 gotOperator(element, 2);
-            else output += element + " ";
+            else s += element + " ";
         }
 
         while (!stack.isEmpty())
-            output += stack.pop() + " ";
+            s += stack.pop() + " ";
+        output = s;
     }
 
     public String getPostfix() {
