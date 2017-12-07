@@ -14,7 +14,7 @@ Then calculate this postfix notation using class `PostfixCalculator`.
 
 
 ### Example:
-```    
+```   JAVA 
 // Convert to postfix
 PostfixConverter converter = new PostfixConverter(new Scanner(System.in).nextLine());
 System.out.println("Postfix notation of current regular: " + converter.getPostfix());
