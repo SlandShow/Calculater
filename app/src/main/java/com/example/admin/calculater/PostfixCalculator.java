@@ -66,34 +66,9 @@ class PostfixCalculator {
                     double element = Double.parseDouble(currentElement);
                     stack.push(element);
                 } catch (NumberFormatException e) {
-                    System.out.println("Hmm...");
+                        /*TODO Nothing here!*/
                 }
             }
-
-
-          /*
-            try {
-                double element = Double.parseDouble(currentElement);
-                stack.push(element);
-            } catch (NumberFormatException e) {
-                if (!currentElement.equals("")) {
-                    number2 = stack.pop();
-                    number1 = stack.pop();
-
-                    // Make calculations
-                    if (currentElement.equals("+"))
-                        interAns = number1 + number2;
-                    else if (currentElement.equals("-"))
-                        interAns = number1 - number2;
-                    else if (currentElement.equals("*"))
-                        interAns = number1 * number2;
-                    else if (currentElement.equals("/"))
-                        interAns = number1 / number2;
-                    else interAns = 0;
-
-                    stack.push(interAns);
-                }
-            }*/
         }
         interAns = stack.pop();
         result = interAns;

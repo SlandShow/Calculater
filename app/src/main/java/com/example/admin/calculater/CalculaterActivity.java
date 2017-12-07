@@ -1,6 +1,6 @@
 package com.example.admin.calculater;
 
-import android.media.MediaCodec;
+
 import android.os.Bundle;
 import android.os.Debug;
 import android.support.design.widget.FloatingActionButton;
@@ -27,16 +27,6 @@ public class CalculaterActivity extends AppCompatActivity {
     private TextView screen;
     private String display;
     private String currentOperator;
-    private boolean work;
-    private int countValues;
-    private int countOperators;
-    private ReversePolishNotationApp notationTransformer;
-    private Calculate mainPrecess;
-    private String final_result;
-    private String currentOperatorTMP;
-    private String output_for_reverse;
-    private String tmpline;
-    private boolean stop;
     private PostfixCalculator calculator;
     private PostfixConverter converter;
     private String displayCopy;
@@ -46,13 +36,6 @@ public class CalculaterActivity extends AppCompatActivity {
     {
         display = "";
         currentOperator = "";
-        work = false;
-        countValues = 0;
-        countOperators = 0;
-        notationTransformer = new ReversePolishNotationApp();
-        mainPrecess = null;
-        final_result = "";
-        output_for_reverse = "";
         //converter = new PostfixConverter();
         calculator = new PostfixCalculator();
         displayCopy = "";
@@ -79,7 +62,6 @@ public class CalculaterActivity extends AppCompatActivity {
 
     // If user push one of the numbers button
     public void onClickNumber(View v) {
-        countValues++;
         Button b = (Button) v;
         display += b.getText();
         displayCopy += display;
@@ -102,59 +84,14 @@ public class CalculaterActivity extends AppCompatActivity {
             currentOperator = (String) b.getText();
             display = display.substring(0, display.length() - 1) + currentOperator;
             list.set(list.size() - 2, currentOperator);
-            displayCopy = display.substring(0, display.length() - 1) + " " + currentOperator;
             updateScreen();
         } else {
-            display += b.getText(); //implicit make b.getText() String ( display = "" + b.getText() )
+            display += b.getText();
             displayCopy += display;
             flag = true;
             list.add((String) b.getText());
-            displayCopy += " " + b.getText();
             updateScreen();
         }
-
-        Log.d("DEB", displayCopy + "\n");
-
-        /*
-        if (display.length() > 0) {
-            work = true;
-            stop = false;
-        } else {
-            Button tmp = (Button) v;
-            String tmpVal = (String) tmp.getText();
-            if (tmpVal.equals("-")) {
-                display += tmpVal;
-                displayCopy += display + " ";
-            }
-        }
-
-        if (work) {
-
-            countOperators++;
-            Button b = (Button) v;
-
-            if (countValues == countOperators) {
-                //normal mode
-                currentOperator = (String) b.getText();
-                display += b.getText(); //implicit make b.getText() String ( display = "" + b.getText() )
-                displayCopy += display + " ";
-                updateScreen();
-                //output_for_reverse += tmpline + "," + currentOperator + ",";
-            } else if (display.length() > 1){
-                // not normal mode
-                // hen user push more than one buttons with operations
-                currentOperator = (String) b.getText();
-                display += b.getText(); // implicit make b.getText() String ( display = "" + b.getText() )
-                display = display.substring(0, display.length() - 2) + currentOperator;
-                countOperators--;
-                displayCopy += display + " ";
-                updateScreen();
-                // int index = output_for_reverse.indexOf(currentOperatorTMP);
-                // output_for_reverse = output_for_reverse.substring(0,index) + "," + currentOperator + ",";
-
-            }
-        } */
-        //
     }
 
     // If user push `=` button
@@ -181,34 +118,15 @@ public class CalculaterActivity extends AppCompatActivity {
         Log.d("DEB", display);
 
         // Transform notation to postfix
-        //converter.startConvert(display);
         converter = new PostfixConverter(tmp);
         // Get this postfix notation
-      String postfixNotation = converter.getPostfix();
-       display = postfixNotation;
+        String postfixNotation = converter.getPostfix();
+        display = postfixNotation;
         // Calculate via postfix
         calculator.startCalculate(postfixNotation);
         // Show result on screen
-       display = Double.toString(calculator.getResult());
+        display = Double.toString(calculator.getResult());
         updateScreen();
-        tmp = "";
-      //  postfixNotation = "";
-      //  list = new ArrayList<>();
-        /*
-        //1)transforms notation
-        notationTransformer.transform(display);
-        //2)get new polish reverse notation
-        String halfOfResult = notationTransformer.getNewNotation();
-        //3)calculate reverse polish notation
-        mainPrecess = new Calculate(halfOfResult);
-        //and get final result of our expression
-        final_result = "" + mainPrecess.doParse(); //converse result in String type (before it was Integer)
-        //4)show this result on app screen
-        display = final_result;
-        // final_result = "";
-        */
-        //updateScreen();
-
     }
 
 
@@ -221,9 +139,8 @@ public class CalculaterActivity extends AppCompatActivity {
     private void clear() {
         display = "";
         currentOperator = "";
-        countOperators = 0;
-        countValues = 0;
-        stop = false;
+        list.clear();
+        tmpNumber = "";
         updateScreen();
     }
 
