@@ -4,6 +4,7 @@ Android calculator, based on postfix converter.
 
 This calculater use postfix notation to calculate all stuff.
 For example, we have infix notation: `12 - 5 * 2`
+
 First of all, we convert this infix notation to postfix: `12 5 2 * -`
 
 (Use class `PostfixConverter` to convert infiz notation.)
