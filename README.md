@@ -7,13 +7,13 @@ For example, we have infix notation: `12 - 5 * 2`
 
 First of all, we convert this infix notation to postfix: `12 5 2 * -`
 
-(Use class `PostfixConverter` to convert infiz notation.)
+(Use class `PostfixConverter` to convert infix notation.)
 
 Then calculate this postfix notation using class `PostfixCalculator`.
 
 
 
-Example:
+###Example:
 ```    
 // Convert to postfix
 PostfixConverter converter = new PostfixConverter(new Scanner(System.in).nextLine());
