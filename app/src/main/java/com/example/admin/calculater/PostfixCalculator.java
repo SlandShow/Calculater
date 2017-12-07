@@ -62,6 +62,7 @@ class PostfixCalculator {
                     stack.push(interAns);
                 }
             } else {
+                // If current element is number
                 try {
                     double element = Double.parseDouble(currentElement);
                     stack.push(element);
