@@ -13,7 +13,7 @@ Then calculate this postfix notation using class `PostfixCalculator`.
 
 
 
-Example:
+### Example:
 ```    
 // Convert to postfix
 PostfixConverter converter = new PostfixConverter(new Scanner(System.in).nextLine());
