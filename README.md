@@ -27,7 +27,7 @@ If we already have user infix input, we can convert it too:
 ``` JAVA
 String input = "10 + 4 * 2";
 PostfixConverter converter = new PostfixConverter(input);
-converter.getPostfix(); // Return 10 4 2 * +
+converter.getPostfix(); // Return string "10 4 2 * +"
 ```
 
 Or we just can calculate postfix notation:
