@@ -12,8 +12,12 @@ Then calculate this postfix notation using class `PostfixCalculator`.
 
 
 
-***Example:
-         `PostfixConverter converter = new PostfixConverter(new Scanner(System.in).nextLine());
-          System.out.println("Postfix notation of current regular: " + converter.getPostfix());
-          PostfixCalculator calculator = new PostfixCalculator(converter.getPostfix());
-          System.out.println("Result is " + calculator.getResult());`
+Example:
+```    
+// Convert to postfix
+PostfixConverter converter = new PostfixConverter(new Scanner(System.in).nextLine());
+System.out.println("Postfix notation of current regular: " + converter.getPostfix());
+// Calculate
+PostfixCalculator calculator = new PostfixCalculator(converter.getPostfix());
+System.out.println("Result is " + calculator.getResult());
+```          
