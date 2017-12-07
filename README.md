@@ -22,3 +22,17 @@ System.out.println("Postfix notation of current regular: " + converter.getPostfi
 PostfixCalculator calculator = new PostfixCalculator(converter.getPostfix());
 System.out.println("Result is " + calculator.getResult());
 ```          
+
+If we already have user infix input, we can convert it too:
+``` JAVA
+String input = "10 + 4 * 2";
+PostfixConverter converter = new PostfixConverter(input);
+converter.getPostfix(); // Return 10 4 2 * +
+```
+
+Or we just can calculate postfix notation:
+``` JAVA
+String postfix = "10 4 2 * +";
+PostfixCalculater calculater = new PostfixCalculater(postfix);
+calculater.getResult(); // Return number 18
+```
