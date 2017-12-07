@@ -20,17 +20,7 @@ class PostfixConverter {
         output = "";
 
         // Convert infix notation to postfix
-        //convert();
-    }
-
-    public PostfixConverter() {
-        stack = new Stack<>();
-        output = "";
-    }
-
-    public void startConvert(String output) {
-        this.output = output;
-        convert(output);
+        convert();
     }
 
     private void gotOperator(String element, int priority) {
@@ -51,20 +41,19 @@ class PostfixConverter {
     }
 
     // From infix to postfix notation
-    private void convert(String s) {
-        String[] elements = s.split(" ");
+    private void convert() {
+        String[] elements = input.split(" ");
 
         for (String element : elements) {
             if (element.equals("+") || element.equals("-"))
                 gotOperator(element, 1);
-            else if (element.equals("×") || element.equals("/"))
+            else if (element.equals("×") || element.equals("÷"))
                 gotOperator(element, 2);
-            else s += element + " ";
+            else output += element + " ";
         }
 
         while (!stack.isEmpty())
-            s += stack.pop() + " ";
-        output = s;
+            output += stack.pop() + " ";
     }
 
     public String getPostfix() {

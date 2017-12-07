@@ -13,7 +13,7 @@ import java.util.Stack;
 
 class PostfixCalculator {
 
-    private Stack<String> stack;
+    private Stack<Double> stack;
     private String regular;
     private double result;
 
@@ -22,7 +22,7 @@ class PostfixCalculator {
         stack = new Stack<>();
 
         // Parse and calculate
-        parse(regular);
+        parse();
     }
 
     public PostfixCalculator() {
@@ -31,49 +31,77 @@ class PostfixCalculator {
 
     public void startCalculate(String regular) {
         this.regular = regular;
-        parse(regular);
+        parse();
     }
 
-    private void parse(String s) {
+    private void parse() {
         String currentElement = "";
-        String[] elements = s.split(" ");
-        double number1, number2, interAns = 0;
+        String[] elements = regular.split(" ");
+        double number1, number2, interAns;
 
         for (int i = 0; i < elements.length; i++) {
             currentElement = elements[i];
 
-           
-            // Check if current element is number
-            try {
-                double element = Double.parseDouble(currentElement);
-                stack.push(String.valueOf(element));
-            } catch (NumberFormatException e) {
-                if (!currentElement.equals("") ) {
-                    try {
-                        number2 = Double.valueOf(stack.pop());
-                        number1 = Double.valueOf(stack.pop());
-                        Log.d("DEB-A", number1 + " " + number2 + " size is " + stack.size());
+            // Check if current element is operator
+            if (isOperator(currentElement)) {
+                if (stack.size() > 1 && !currentElement.equals("")) {
+                    number2 = stack.pop();
+                    number1 = stack.pop();
 
+                    // Make calculations
+                    if (currentElement.equals("+"))
+                        interAns = number1 + number2;
+                    else if (currentElement.equals("-"))
+                        interAns = number1 - number2;
+                    else if (currentElement.equals("×"))
+                        interAns = number1 * number2;
+                    else if (currentElement.equals("÷"))
+                        interAns = number1 / number2;
+                    else interAns = 0;
 
-                        // Make calculations
-                        if (currentElement.equals("+"))
-                            interAns = number1 + number2;
-                        else if (currentElement.equals("-"))
-                            interAns = number1 - number2;
-                        else if (currentElement.equals("×"))
-                            interAns = number1 * number2;
-                        else if (currentElement.equals("÷"))
-                            interAns = number1 / number2;
-                        else interAns = 0;
-
-                        stack.push(String.valueOf(interAns));
-                    } catch (Exception e1) { /* Fix bug */ }
+                    stack.push(interAns);
+                }
+            } else {
+                try {
+                    double element = Double.parseDouble(currentElement);
+                    stack.push(element);
+                } catch (NumberFormatException e) {
+                    System.out.println("Hmm...");
                 }
             }
-            Log.d("DEB-A", "interAns:" + interAns);
+
+
+          /*
+            try {
+                double element = Double.parseDouble(currentElement);
+                stack.push(element);
+            } catch (NumberFormatException e) {
+                if (!currentElement.equals("")) {
+                    number2 = stack.pop();
+                    number1 = stack.pop();
+
+                    // Make calculations
+                    if (currentElement.equals("+"))
+                        interAns = number1 + number2;
+                    else if (currentElement.equals("-"))
+                        interAns = number1 - number2;
+                    else if (currentElement.equals("*"))
+                        interAns = number1 * number2;
+                    else if (currentElement.equals("/"))
+                        interAns = number1 / number2;
+                    else interAns = 0;
+
+                    stack.push(interAns);
+                }
+            }*/
         }
-        interAns = Double.valueOf(stack.pop());
+        interAns = stack.pop();
         result = interAns;
+    }
+
+
+    private boolean isOperator(String s) {
+        return s.equals("+") || s.equals("-") || s.equals("×") || s.equals("÷");
     }
 
 

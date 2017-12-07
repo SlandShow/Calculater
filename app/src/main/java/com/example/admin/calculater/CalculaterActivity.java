@@ -53,7 +53,7 @@ public class CalculaterActivity extends AppCompatActivity {
         mainPrecess = null;
         final_result = "";
         output_for_reverse = "";
-        converter = new PostfixConverter();
+        //converter = new PostfixConverter();
         calculator = new PostfixCalculator();
         displayCopy = "";
     }
@@ -181,14 +181,19 @@ public class CalculaterActivity extends AppCompatActivity {
         Log.d("DEB", display);
 
         // Transform notation to postfix
-        converter.startConvert(display);
+        //converter.startConvert(display);
+        converter = new PostfixConverter(tmp);
         // Get this postfix notation
-        String postfixNotation = converter.getPostfix();
+      String postfixNotation = converter.getPostfix();
+       display = postfixNotation;
         // Calculate via postfix
         calculator.startCalculate(postfixNotation);
         // Show result on screen
-        display = Double.toString(calculator.getResult());
+       display = Double.toString(calculator.getResult());
         updateScreen();
+        tmp = "";
+      //  postfixNotation = "";
+      //  list = new ArrayList<>();
         /*
         //1)transforms notation
         notationTransformer.transform(display);
