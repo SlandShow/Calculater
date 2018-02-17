@@ -67,11 +67,18 @@ public class CalculaterActivity extends AppCompatActivity {
         displayCopy += display;
         updateScreen();
         flag = false;
-        tmpNumber += b.getText();
+
+        if (first) {
+            first = false;
+            tmpNumber += firstOperator + b.getText();
+            firstOperator = "";
+        } else tmpNumber += b.getText();
     }
 
 
     private boolean flag = false;
+    private boolean first = true;
+    private String firstOperator = "";
 
 
     // If user push +/-/÷/×
@@ -91,6 +98,10 @@ public class CalculaterActivity extends AppCompatActivity {
             flag = true;
             list.add((String) b.getText());
             updateScreen();
+        }
+
+        if (b.getText().equals("-") && first) {
+            firstOperator = b.getText().toString();
         }
     }
 
@@ -146,6 +157,7 @@ public class CalculaterActivity extends AppCompatActivity {
 
 
 }
+
 
 
 
